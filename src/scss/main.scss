@@ -1,0 +1,24 @@
+@import "utils/libs";
+@import "utils/vars";
+@import "utils/mixins";
+@import "utils/fonts";
+
+
+html {
+  color: $color;
+}
+
+p {
+  @include size(50px);
+}
+
+
+// test
+
+/* dsdgfgsgsgf */
+
+span {
+  background: blue;
+  font-size: 25px;
+  float: left;
+}
