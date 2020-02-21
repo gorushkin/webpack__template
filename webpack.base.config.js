@@ -1,14 +1,24 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const PATHS = {
+  src: path.join(__dirname, './src'),
+  dist: path.join(__dirname, './dist'),
+  assets: './assets',
+}
+
 module.exports = {
+
+  externals: {
+    paths: PATHS
+  },
   entry: {
-    app: './src/index.js'
+    app: './src/index.js',
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist'
+    filename: `${PATHS.assets}/js/[name].js`,
+    path: PATHS.dist,
+    // publicPath: '/'
   },
   module: {
     rules: [{
@@ -19,7 +29,7 @@ module.exports = {
       test: /\.scss$/,
       use: [
         'style-loader',
-        MiniCssExtractPlugin.loader, 
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: { sourceMap: true}
@@ -35,7 +45,7 @@ module.exports = {
       test: /\.css$/,
       use: [
         'style-loader',
-        MiniCssExtractPlugin.loader, 
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: { sourceMap: true}
@@ -46,12 +56,9 @@ module.exports = {
       ]
     }]
   },
-  devServer: {
-    overlay: true
-  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: `${PATHS.assets}/css/[name].css`,
       chunkFilename: '[id].css'
     })
   ],
