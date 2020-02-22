@@ -6,19 +6,20 @@
 
 html {
   color: $color;
+  // color: #000;
 }
 
 p {
   @include size(50px);
+  display: flex;
 }
 
-
-// test
-
-/* dsdgfgsgsgf */
 
 span {
   background: blue;
   font-size: 25px;
-  float: left;
+}
+
+img {
+  max-width: 100%;
 }
