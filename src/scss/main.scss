@@ -5,12 +5,10 @@
 
 
 html {
-  color: $color;
-  // color: #000;
+  // color: $color;
 }
 
 p {
-  @include size(50px);
   display: flex;
 }
 
@@ -22,4 +20,5 @@ span {
 
 img {
   max-width: 100%;
+  width: 150px;
 }
