@@ -19,14 +19,25 @@ module.exports = {
     paths: PATHS
   },
   entry: {
-    // app: './src/index.js',
     app: PATHS.src,
+    test: `${PATHS.src}/test.js`,
   },
   output: {
-    // filename: `${PATHS.assets}/js/[name].js`,
-    filename: `js/[name].js`,
+    filename: `js/[name].[hash].js`,
     path: PATHS.build,
     publicPath: '/'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendors',
+          test: /node_modules/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
   module: {
     rules: [{
@@ -95,8 +106,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // filename: `${PATHS.assets}/css/[name].css`,
-      filename: `css/[name].css`,
+      filename: `css/[name].[hash].css`,
     }),
     new CopyWebpackPlugin([{
         from: `${PATHS.src}/img/`,
@@ -108,9 +118,9 @@ module.exports = {
       },
     ]),
     new HtmlWebpackPlugin({
-      hash: false,
       template: `${PATHS.src}/index.html`,
-      filename: './index.html'
+      filename: './index.html',
+      // inject: false,
     }),
     new VueLoaderPlugin(),
   ],
