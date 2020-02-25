@@ -23,7 +23,7 @@ module.exports = {
     test: `${PATHS.src}/test.js`,
   },
   output: {
-    filename: `js/[name].[hash].js`,
+    filename: `js/[name].js`,
     path: PATHS.build,
     publicPath: '/'
   },
@@ -57,6 +57,13 @@ module.exports = {
       loader: 'file-loader',
       options: {
         name: '[name].[ext]'
+      }
+    }, {
+      test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        emitFile: false,
       }
     }, {
       test: /\.scss$/,
@@ -101,16 +108,20 @@ module.exports = {
   },
   resolve: {
     alias: {
+      '~': 'src',
       'vue$': 'vue/dist/vue',
     }
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: `css/[name].[hash].css`,
+      filename: `css/[name].css`,
     }),
     new CopyWebpackPlugin([{
         from: `${PATHS.src}/img/`,
         to: `img`
+      }, {
+        from: `${PATHS.src}/fonts/`,
+        to: `fonts`
       },
       {
         from: `${PATHS.src}/static/`,
